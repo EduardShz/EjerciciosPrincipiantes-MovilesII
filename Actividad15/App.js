@@ -1,0 +1,96 @@
+import { StyleSheet, Text, View, TextInput, Button, Alert } from "react-native";
+import { useState } from "react";
+
+export default function App() {
+  const [text1, setText1] = useState("");
+  const [message, setMessage] = useState("");
+
+  const setResult = () => {
+    const inches = parseFloat(text1);
+    const factor = 0.0254;
+
+    if (isNaN(inches)) {
+      Alert.alert("Error", "Por favor introduce un número válido");
+      return;
+    }
+
+    const meters = inches * factor;
+    setMessage(`${inches} pulgadas son ${meters.toFixed(4)} metros.`);
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Actividad 15</Text>
+
+      <Text style={{ fontStyle: "italic" }}>
+        <Text style={{ textDecorationLine: "underline", fontWeight: 600 }}>
+          Instrucciones:
+        </Text>
+        <Text>
+          &nbsp;Cree un programa que permita convertir N pulgadas a M metros. 1 Pulgada = 2.54 cm / 100 = 0.0254
+        </Text>
+      </Text>
+
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Ingresa la cantidad de pulgadas"
+          keyboardType="numeric"
+          value={text1}
+          onChangeText={setText1}
+        />
+      </View>
+
+      <View style={styles.buttonsContainer}>
+        <Button title="Convertir" color={"green"} onPress={setResult} />
+      </View>
+
+      <Text style={styles.output}>{message}</Text>
+
+      <Text style={styles.footPage}>Por José Eduardo Hernández Sánchez</Text>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    backgroundColor: "#fff",
+    padding: 20,
+  },
+  title: {
+    alignSelf: "center",
+    marginTop: 100,
+    marginBottom: 50,
+    fontSize: 50,
+    fontWeight: 600,
+  },
+  footPage: {
+    alignSelf: "flex-end",
+    paddingTop: 200,
+    fontSize: 15,
+    fontWeight: 400,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#aaa",
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 5,
+  },
+  output: {
+    alignSelf: "center",
+    marginTop: 20,
+    fontSize: 18,
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+});
